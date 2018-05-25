@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./vue.js"></script>
+	<script src="./axios.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+<div class="container" style="text-align: center;">
+	<h3> {{titre}} </h3>
+<div class="jumbotron" style="font-size: 16px;"><h4>{{Explication}} </h4></div>
+</div>
+</div>
+<script>
+var	app = new Vue({
+	el:"#app",
+		data:{
+			titre:"",
+			Explication:""
+		},
+		methods:{
+            changeunits(){
+                var app=this;
+                axios.get("http://127.0.0.1/slim/randomsaying/").then(function (res) {
+                console.log(res.data);
+                app.titre=res.data.Titre;
+                app.Explication=res.data.Explication;
+                }).catch(e => {
+      console.log(e)
+    }) 
+
+                
+            } 
+        },
+    beforeMount(){
+    this.changeunits();
+ }
+});
+</script>	
+</body>
+</html>
